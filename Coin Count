@@ -1,0 +1,44 @@
+#pragma strict
+var scoreText:GUIText;
+var scoore:int;
+var key : int;
+var keys : int = 0;
+
+
+  function Start (){
+
+scoore =(PlayerPrefs.GetInt("playerScoore"));
+  }
+
+  
+function Update () {
+if (key <= keys){
+ // read score on how may points collected by player 
+ PlayerPrefs.SetInt("playerScoore", scoore);
+ 
+}
+ 
+    scoreText.text = "Scoore: " + scoore;
+}
+// Coint count
+function OnTriggerEnter2D(hitcoint: Collider2D) {
+//if (hitcoint.gameObject.tag == "coint"){
+if (hitcoint.tag == "coint"){
+ scoore += 1;
+ 
+// fruit worth 50
+}
+else if (hitcoint.tag == "50points"){
+ scoore += 50;
+}
+// fruit worth 10
+else if (hitcoint.tag == "10points"){
+ scoore += 10;
+}
+else if (hitcoint.tag == "key"){
+// the gameobject "1" shows when you collect the fruit 
+keys += 1;
+}
+}
+
+
