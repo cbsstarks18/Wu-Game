@@ -1,15 +1,14 @@
 #pragma strict
 var LIVES : int = 3;
-var liveTaken : float;
-var life1 : GameObject;
-var life2 : GameObject;
-var life3 : GameObject;
-var GameOver : GameObject;
+var liveTaken : float;  // life gets taken away 
+var life1 : GameObject; // heart one is taken when hit by enemy 
+var life2 : GameObject; // heart two is taken when hit by enemy 
+var life3 : GameObject; // heart three is taken when hit by enemy 
+var GameOver : GameObject; // Respawn to start of game "you have been killed"
 
-public var TotalLifes : int = 3;
+public var TotalLifes : int = 3; // Start off initially with three lives 
 private var TotalLifes2 : int = 1;
-var medkitSound : AudioClip;
-var AuchSound: AudioClip; // audio
+
 
 var anim : Animator;
 var die = false;
@@ -36,36 +35,30 @@ function OnTriggerExit2D(hit3: Collider2D) {
 function OnTriggerEnter2D(hit2: Collider2D) {
 
 
-if(hit2.gameObject.tag == "InstantDie"){
+if(hit2.gameObject.tag == "InstantDie"){ // if you fall, instant die respawns you 
      LIVES = LIVES - 4 ;
      //audio.PlayOneShot(AuchSound);
    
 }
-if(hit2.gameObject.tag == "spike"){
+if(hit2.gameObject.tag == "spike"){ // if you touch spikes, spikes takes away one heart
      LIVES = LIVES - 1 ;
      audio.PlayOneShot(AuchSound);
    
 }
-if(hit2.gameObject.tag == "enemy1"){
+if(hit2.gameObject.tag == "enemy1"){ // if you touch fish enemy, then one heart is taken away 
      LIVES = LIVES - 1 ;
      audio.PlayOneShot(AuchSound);
-}
 
- if(hit2.gameObject.tag == "medkit"){
-	 LIVES = 3 ;
-	// audio.PlayOneShot(medkitSound);
-}
-
-if(hit2.gameObject.tag == "LifeCure" && LIVES == 1){
+if(hit2.gameObject.tag == "LifeCure" && LIVES == 1){ // one whole life will be gained 
      LIVES = 2 ;
     // audio.PlayOneShot(AuchSound);
 }
-else if(hit2.gameObject.tag == "LifeCure" && LIVES == 2){
+else if(hit2.gameObject.tag == "LifeCure" && LIVES == 2){ // one whole life will be gained 
      LIVES = 3 ;
     
     // audio.PlayOneShot(AuchSound);
 }
-else if(hit2.gameObject.tag == "LifeCure" &&  LIVES >= 3){
+else if(hit2.gameObject.tag == "LifeCure" &&  LIVES >= 3){// one whole life will be gained 
  TotalLifes = TotalLifes + 1 ;
   PlayerPrefs.SetInt("TotalLifes", TotalLifes);
  }
@@ -140,7 +133,7 @@ life2.SetActive(false);
 life3.SetActive(true);
 
 }
-
+// when lives are at zero and you die on next turn you will be respawned 
 else if (LIVES <= 0 && die == false) {
 onetime = true;
 if (onetime == true){
@@ -179,7 +172,7 @@ respawn ();
 
 
 
-function respawn (){
+function respawn (){ // will set you back to the begaining of the level 
 
 yield WaitForSeconds(2);
 Application.LoadLevel(Application.loadedLevel);
