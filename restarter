@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+// Restarts game when you run out of lives 
 public class Restarter : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
