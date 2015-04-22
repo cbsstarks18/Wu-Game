@@ -1,0 +1,41 @@
+using UnityEngine;
+using System.Collections;
+
+public class BackgroundScroller : MonoBehaviour 
+{
+	private GameObject[] panels;
+	public int numberOfPanels;
+	private float xPos;
+	private float xPosCalc;
+	private float colliderWidth;
+
+	void Start()
+	{
+		panels = GameObject.FindGameObjectsWithTag("Sky");
+
+		foreach(GameObject c in panels)
+		{
+			numberOfPanels++;
+		}
+	}
+
+	void Update()
+	{
+
+	}
+
+	void OnTriggerEnter2D(Collider2D c)
+	{
+
+		colliderWidth = c.gameObject.GetComponent<BoxCollider2D>().size.x;
+		xPosCalc = colliderWidth * numberOfPanels;
+		Vector3 position = c.gameObject.transform.position;
+		position.x = position.x + xPosCalc;
+		c.gameObject.transform.position = position;
+
+
+
+	}
+
+
+}
